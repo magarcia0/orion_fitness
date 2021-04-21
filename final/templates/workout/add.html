@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Add Workout</title>
+  {% include "bootstrap.html" %}
+</head>
+<body>
+  {% include "navbar.html" %}
+  <div class="jumbotron">
+    <h1>Add Workout Entry</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <table>
+        {{ form_data.as_table }}
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" class="btn btn-primary" name="add" value = "Add Workout Entry">
+						<a href="/workout/" class="btn btn-secondary">Cancel</a>
+					</td>
+				</td></tr>
+			</table>
+    </form>
+  </div>
+</body>
+</html>

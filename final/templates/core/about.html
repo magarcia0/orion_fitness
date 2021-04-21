@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    {% include "bootstrap.html" %}
+    {% load static %}
+    <!-- <script src="{%static '.js' %}" /></script> -->
+    <link rel="stylesheet" href="{%static 'global.css' %}" />
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    <h1> About </h1>
+    <div class="col-4" style="margin: auto;">
+        <img class="d-block w-100" src="{%static 'outdoors.jpg'%}" alt="Outdoors">
+    </div>
+    <br />
+    <h2 style="text-align: center;">About Me:</h2>
+    <p style="margin-top: 30px; margin-left: 160px; margin-right: 160px">
+        I was born and raised in SoCal. Some of my hobbies include playing video games, going to the gym,
+        and listening to vinyls. I also enjoy outdoor activities like hiking, rowing, and fishing. I recently built my
+        PC.
+        Some of the specs on it are: Ryzen 5 3600, RTX 3060ti, Asus Tuff x570-plus WiFi, 32GB RAM @3200 mHz, etc. I am
+        the
+        first person in my family to graduate and earn an associates from a Junior College. I am also the first person
+        to
+        attend a 4-year univerity. Currently, I am a Junior but after this semester I will only have one year left of
+        school.
+    </p>
+    <h3 style="text-align: center;">Project 1 process:</h3>
+    <p style="margin-top: 30px; margin-left: 160px; margin-right: 160px">
+        For this project we utilized various technologies we recently learned about. To render the charts 
+        on the dashboard we used Chartist. Chartist is a charting library in JavaScript. We also implemented various
+        bootstrap
+        components in this project. One of those components is the 'delete' modal and the other was the navbar.
+        Of course, we used Django as the framework. At first I didn't like Django but it has actually been growing on me.
+    </p>
+    <p style="margin-top: 30px; margin-left: 160px; margin-right: 160px">
+        My stategy for implementing this project was pretty much what was outlined on the project worksheet. First,
+        I spun up a new Django project and created the necessary apps for this project. Once I had the project up and running
+        I started by doing the navbar. After that it was the login, join, and logout functionalities since I already had those
+        from a previous assignment. Once I had that working I did the Tasks, Budget, and then the Dashboard. Finally, I wrapped
+        the project up by doing the 'about' section.
+    </p>
+
+
+
+</body>
+
+</html>

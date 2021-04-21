@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Organizer</title>
+    {% include "bootstrap.html" %}
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="{%static 'common.js' %}" />
+    </script>
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    <br />
+    {% if user.is_authenticated %}
+    <h1 style="text-align: center;">Welcome to Fitness App, {{ user.get_full_name }}</h1>
+    {% endif %}
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="jumbotron">
+                    <h1>Workout</h1>
+                    </p>No workout data to display.</p>
+                    <form method="GET" action="/workout/add/">
+                        <input type="submit" class="btn btn-primary" value="Add Workout Entry">
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="jumbotron">
+                    <h1>Nutrition</h1>
+                    </p>There are no nutrition entries to display.</p>
+                    <form method="GET" action="/nutrition/add/">
+                        <input type="submit" class="btn btn-primary" value="Add Nutrition Entry">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/" >Organizer</a>
+  <div style="margin-left: auto;">
+    <ul class="navbar-nav ">
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="/">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/nutrition">Nutrition</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/workout">Workout</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+      {% if user.is_authenticated %}
+        <li class="nav-item">
+         <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Log In</a>
+        </li>
+      {% endif %}
+    </ul>
+</div>
+</nav>

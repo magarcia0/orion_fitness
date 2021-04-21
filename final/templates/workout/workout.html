@@ -1,0 +1,70 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Workout</title>
+  {% include "bootstrap.html" %}
+	{% load static %}
+	<script src="{%static 'common.js' %}" /></script>
+</head>
+<body>
+  {% include "navbar.html" %}
+	<div class="jumbotron">
+	  <h1>Workout Entries</h1>
+	  {% if not table_data %}
+	  	</p>There are no workout entries to display.</p>
+	  {% else %}
+			<table class="table table-striped" border="1">
+	    <tr>
+	      <th>Description</th>
+	      <th>Category</th>
+	      <th>Projected</th>
+	      <th>Actual</th>
+				<th></th>
+	    </tr>
+	    {% for row in table_data %}
+	    	<tr>
+	      	<td>{{ row.description }}</td>
+	      	<td>{{ row.category }}</td>
+	      	<td>{{ row.projected }}</td>
+	      	<td>{{ row.actual }}</td>
+	      	<td>
+	        	<a class="btn btn-primary" href="/workout/edit/{{ row.id }}/">Edit</a>
+	        	<a class="btn btn-primary" href="#" onclick="confirmDeleteModal({{ row.id }})">Delete</a>
+					</td>
+				</tr>
+	    {% endfor %}
+		  </table>
+		{% endif %}
+	  {% if res > 0 %}
+		<p style="color: green;">There is a workout surplus of ${{ res }}</p>
+		{% elif res < 0 %}
+		<p style="color: red;">There is a workout deficit of ${{ res }}</p>
+		{% else %}
+		<p style="color: blue;">No workout surplus or deficit ${{ res }}</p>
+		{% endif %}
+	  <form method="GET" action="/workout/add/">
+	    <input type="submit" class="btn btn-primary" value = "Add Workout Entry">
+	  </form>
+	</div>
+
+  <!-- Modal -->
+  <div id="deleteModal" class="modal fade" role='dialog'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Delete Workout Entry</h4>
+        </div>
+        <div class="modal-body">
+          <p>Do you really want to delete this Workout Entry?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <span id= 'deleteButton'></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Modal ends here--->
+</body>
+</html>
