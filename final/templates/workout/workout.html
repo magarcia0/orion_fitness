@@ -9,17 +9,17 @@
 <body>
   {% include "navbar.html" %}
 	<div class="jumbotron">
-	  <h1>Workout Entries</h1>
+	  <h1>Workout Journal</h1>
 	  {% if not table_data %}
 	  	</p>There are no workout entries to display.</p>
 	  {% else %}
 			<table class="table table-striped" border="1">
 	    <tr>
-	      <th>Description</th>
-	      <th>Category</th>
-	      <th>Projected</th>
-	      <th>Actual</th>
-				<th></th>
+	      <th style="border: 10px;">Description</th>
+	      <th style="border-top: 10px;">Category</th>
+	      <th style="border: 10px;">Projected</th>
+	      <th style="border-top: 10px;">Actual</th>
+	      <th style="border: 10px;">Action</th>
 	    </tr>
 	    {% for row in table_data %}
 	    	<tr>

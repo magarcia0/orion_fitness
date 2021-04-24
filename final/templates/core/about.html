@@ -6,15 +6,15 @@
     <!-- <script src="{%static '.js' %}" /></script> -->
     <link rel="stylesheet" href="{%static 'global.css' %}" />
 </head>
-
 <body>
     {% include "navbar.html" %}
-    <h1> About </h1>
+    <div class="card bg-light rounded center" >
     <div class="col-4" style="margin: auto;">
-        <img class="d-block w-100" src="{%static 'outdoors.jpg'%}" alt="Outdoors">
+        <img class="card-img-top" src="..." alt="Card image cap">
     </div>
     <br />
-    <h2 style="text-align: center;">About Me:</h2>
+    <div class="card-body">
+    <h2 style="text-align: center;">About:</h2>
     <p style="margin-top: 30px; margin-left: 160px; margin-right: 160px">
         I was born and raised in SoCal. Some of my hobbies include playing video games, going to the gym,
         and listening to vinyls. I also enjoy outdoor activities like hiking, rowing, and fishing. I recently built my
@@ -44,6 +44,8 @@
 
 
 
+</div>
+</div>
 </body>
 
 </html>

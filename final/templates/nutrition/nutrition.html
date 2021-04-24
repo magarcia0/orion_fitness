@@ -9,29 +9,37 @@
 <body>
   {% include "navbar.html" %}
 	<div class="jumbotron">
-	  <h1>Nutrition Entries</h1>
+	  <h1>Nutrition Journal</h1>
 	  <div class="button">
 		<a href="?switch">
 			<label class="btn btn-secondary btn-sm">
-	       	Hide Completed Nutrition
+	       	Hide Macros
 			</label>
 		</a>
 	  </div>
 	  {% if not table_data %}
-	  	</p>There are no nutrition entries to display.</p>
+	  	</p>No nutrition entries to display.</p>
 	  {% else %}
 			<table class="table table-striped" border="1">
 	    <tr>
-	      <th>Description</th>
-	      <th>Category</th>
-	      <th>Completed</th>
-				<th></th>
+	      <th style="border: 10px;">Description</th>
+	      <th style="border-top: 10px;">Category</th> 
+	      <th style="border: 10px;">Calories</th>
+	      <th style="border-top: 10px;">Protein</th>
+	      <th style="border: 10px;">Fats</th>
+	      <th style="border-top: 10px;">Carbs</th>
+	      <th style="border: 10px;">Completed</th>
+	      <th style="border-top: 10px;">Action</th>
 	    </tr>
 	    {% for row in table_data %}
 	    	<tr>
 		{% if row.switcharoo == False %}
 	      	<td>{{ row.description }}</td>
 	      	<td>{{ row.category }}</td>
+	      	<td>{{ row.calories }}</td>
+	      	<td>{{ row.protein }}</td>
+	      	<td>{{ row.fats }}</td>
+	      	<td>{{ row.carbs }}</td>
 		{% if row.completed == False %}
 	       	<td><a href="?toggle_completed={{ row.id }}">No</a></td>
 		{% else %}

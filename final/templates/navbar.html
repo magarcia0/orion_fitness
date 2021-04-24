@@ -1,28 +1,28 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/" >Organizer</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <a class="navbar-brand" href="/" style="font-size: x-large;" >Orion Fitness</a>
   <div style="margin-left: auto;">
-    <ul class="navbar-nav ">
+    <ul class="navbar-nav">
       {% if user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="/">Dashboard</a>
+        <a class="nav-link" href="/" style="color: white;">Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/nutrition">Nutrition</a>
+        <a class="nav-link" href="/nutrition" style="color: white;">Nutrition</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/workout">Workout</a>
+        <a class="nav-link" href="/workout" style="color: white;">Workout</a>
       </li>
       {% endif %}
       <li class="nav-item">
-        <a class="nav-link" href="/about">About</a>
+        <a class="nav-link" href="/about" style="color: white;">About</a>
       </li>
       {% if user.is_authenticated %}
         <li class="nav-item">
-         <a class="nav-link" href="/logout">Log Out</a>
+         <a class="nav-link" href="/logout" style="color: white;">Log Out</a>
         </li>
       {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="/login">Log In</a>
+          <a class="nav-link" href="/login" style="color: white;">Log In</a>
         </li>
       {% endif %}
     </ul>

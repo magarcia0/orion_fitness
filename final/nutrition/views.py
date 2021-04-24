@@ -46,8 +46,12 @@ def add(request):
 			if (add_form.is_valid()):
 				description = add_form.cleaned_data["description"]
 				category = add_form.cleaned_data["category"]
+				calories = add_form.cleaned_data["calories"]
+				protein = add_form.cleaned_data["protein"]
+				fats = add_form.cleaned_data["fats"]
+				carbs = add_form.cleaned_data["carbs"]
 				user = User.objects.get(id=request.user.id)
-				NutritionEntry(user = user, description=description, category=category).save()
+				NutritionEntry(user = user, description=description, category=category, calories=calories, protein=protein, fats=fats, carbs=carbs).save()
 				return redirect("/nutrition/")
 			else:
 				context = {
