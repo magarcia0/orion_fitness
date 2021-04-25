@@ -5,41 +5,46 @@
     {% load static %}
     <!-- <script src="{%static '.js' %}" /></script> -->
     <link rel="stylesheet" href="{%static 'global.css' %}" />
+    <style>
+        body {
+            background-image: url("/static/space.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center
+        }
+</style>
 </head>
 <body>
     {% include "navbar.html" %}
-    <div class="card bg-light rounded center" >
-    <div class="col-4" style="margin: auto;">
-        <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card bg-light rounded center" style="margin-top: 60px; margin-bottom: 100px; opacity: 0.80; margin-left: 400px; margin-right: 400px;" >
+    <div class="col-4" style="max-width: 50%; margin: auto; margin-top: 10px;">
+        <img class="card-img" src="/static/meditate.jpg" alt="meditation">
     </div>
     <br />
     <div class="card-body">
-    <h2 style="text-align: center;">About:</h2>
+    <h2 style="text-align: center;">What is Orion Fitness?</h2>
     <p style="margin-top: 30px; margin-left: 160px; margin-right: 160px">
-        I was born and raised in SoCal. Some of my hobbies include playing video games, going to the gym,
-        and listening to vinyls. I also enjoy outdoor activities like hiking, rowing, and fishing. I recently built my
-        PC.
-        Some of the specs on it are: Ryzen 5 3600, RTX 3060ti, Asus Tuff x570-plus WiFi, 32GB RAM @3200 mHz, etc. I am
-        the
-        first person in my family to graduate and earn an associates from a Junior College. I am also the first person
-        to
-        attend a 4-year univerity. Currently, I am a Junior but after this semester I will only have one year left of
-        school.
-    </p>
-    <h3 style="text-align: center;">Project 1 process:</h3>
-    <p style="margin-top: 30px; margin-left: 160px; margin-right: 160px">
-        For this project we utilized various technologies we recently learned about. To render the charts 
-        on the dashboard we used Chartist. Chartist is a charting library in JavaScript. We also implemented various
-        bootstrap
-        components in this project. One of those components is the 'delete' modal and the other was the navbar.
-        Of course, we used Django as the framework. At first I didn't like Django but it has actually been growing on me.
+        Lorem ipsum dolor sit amet, est aliquid tacimates vituperatoribus te, invenire electram no sed, qui ne porro atqui atomorum. Eos ei accusam lucilius delicatissimi. Est oportere scripserit id, vix ut ridens persecuti. Ex primis aeterno singulis usu, rebum singulis consetetur eu vim. Ex tempor dicunt eum, nam cu sumo tota nusquam. Mea ne perfecto signiferumque, nec et sonet solet, in vim sint epicurei rationibus.
+
+        Ei duo reprimique scribentur, ea aliquam facilis legendos his. Pri cu appetere tincidunt. An sed tempor iudicabit prodesset, semper molestiae est id. An postea oblique duo, in usu reque delectus probatus.
+        
+        Error scaevola luptatum te pri, discere intellegat ex pro. Viderer tacimates cu duo, tota malis abhorreant ei mea. Putant verterem patrioque vim ne, ne gubergren similique vix. Eu alii primis sensibus per. Homero doming iriure et vix, id sed solet ancillae.
+        
+        Soleat phaedrum maluisset ad has, per no odio sumo. Te assum mazim laudem qui, in porro viderer vis. Ei nihil comprehensam sit. Fugit urbanitas consectetuer duo in, cu sed tale dicat delicatissimi.
+        
+        Sea ea inani aperiri invenire. An iisque mandamus vis. Nostrud inimicus ius no. In vel noster melius repudiare, partem salutandi nam no. Ferri torquatos per an. Mei ut purto ceteros, et sed viderer pertinacia..
     </p>
     <p style="margin-top: 30px; margin-left: 160px; margin-right: 160px">
-        My stategy for implementing this project was pretty much what was outlined on the project worksheet. First,
-        I spun up a new Django project and created the necessary apps for this project. Once I had the project up and running
-        I started by doing the navbar. After that it was the login, join, and logout functionalities since I already had those
-        from a previous assignment. Once I had that working I did the Tasks, Budget, and then the Dashboard. Finally, I wrapped
-        the project up by doing the 'about' section.
+        Lorem ipsum dolor sit amet, est aliquid tacimates vituperatoribus te, invenire electram no sed, qui ne porro atqui atomorum. Eos ei accusam lucilius delicatissimi. Est oportere scripserit id, vix ut ridens persecuti. Ex primis aeterno singulis usu, rebum singulis consetetur eu vim. Ex tempor dicunt eum, nam cu sumo tota nusquam. Mea ne perfecto signiferumque, nec et sonet solet, in vim sint epicurei rationibus.
+
+        Ei duo reprimique scribentur, ea aliquam facilis legendos his. Pri cu appetere tincidunt. An sed tempor iudicabit prodesset, semper molestiae est id. An postea oblique duo, in usu reque delectus probatus.
+        
+        Error scaevola luptatum te pri, discere intellegat ex pro. Viderer tacimates cu duo, tota malis abhorreant ei mea. Putant verterem patrioque vim ne, ne gubergren similique vix. Eu alii primis sensibus per. Homero doming iriure et vix, id sed solet ancillae.
+        
+        Soleat phaedrum maluisset ad has, per no odio sumo. Te assum mazim laudem qui, in porro viderer vis. Ei nihil comprehensam sit. Fugit urbanitas consectetuer duo in, cu sed tale dicat delicatissimi.
+        
+        Sea ea inani aperiri invenire. An iisque mandamus vis. Nostrud inimicus ius no. In vel noster melius repudiare, partem salutandi nam no. Ferri torquatos per an. Mei ut purto ceteros, et sed viderer pertinacia..
     </p>
 
 
