@@ -1,28 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
-  <a class="navbar-brand" href="/" style="font-size: x-large;" >Orion Fitness</a>
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="opacity: 0.96;">
+  <a class="navbar-brand" href="/" style="font-size: x-large; font-family: 'Fredoka One', cursive;">Orion Fitness</a>
   <div style="margin-left: auto;">
     <ul class="navbar-nav">
       {% if user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="/" style="color: white;">Dashboard</a>
+        <a class="nav-link" href="/" style="color: white; font-family: 'Fredoka One', cursive;">Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/nutrition" style="color: white;">Nutrition</a>
+        <a class="nav-link" href="/nutrition" style="color: white; font-family: 'Fredoka One', cursive;">Nutrition</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/workout" style="color: white;">Workout</a>
+        <a class="nav-link" href="/workout" style="color: white; font-family: 'Fredoka One', cursive;">Exercise</a>
       </li>
       {% endif %}
       <li class="nav-item">
-        <a class="nav-link" href="/about" style="color: white;">About</a>
+        <a class="nav-link" href="/about" style="color: white; font-family: 'Fredoka One', cursive;">About</a>
       </li>
       {% if user.is_authenticated %}
         <li class="nav-item">
-         <a class="nav-link" href="/logout" style="color: white;">Log Out</a>
+         <a class="nav-link" href="/logout" style="color: white; font-family: 'Fredoka One', cursive;">Log Out</a>
         </li>
       {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="/login" style="color: white;">Log In</a>
+          <a class="nav-link" href="/login" style="color: white; font-family: 'Fredoka One', cursive;">Log In</a>
         </li>
       {% endif %}
     </ul>

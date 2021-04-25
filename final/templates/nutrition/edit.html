@@ -4,11 +4,19 @@
   <meta charset="utf-8">
   <title>Edit Journal Entry</title>
   {% include "bootstrap.html" %}
+  	<style>
+        body {
+            background-image: url("/static/food.jpg");
+            background-size: cover;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+        }
+    </style>
 </head>
 <body>
   {% include "navbar.html" %}
-  <div class="jumbotron">
-    <h1>Edit Journal Entry</h1>
+  <div class="jumbotron" style="margin-top: 10px;">
+    <h1>Edit Nutrition Entry</h1>
     <form method="POST">
       {% csrf_token %}
       <table>

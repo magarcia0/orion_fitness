@@ -4,31 +4,42 @@
     {% include "navbar.html" %}
     <style>
         body {
-           background-image: url("/static/bg.jpg");
+           background-image: url("/static/self.jpg");
            background-size: cover;
+           background-repeat: no-repeat;
+           background-attachment: fixed;
+           background-position: center;
         }
      </style
     </head>
 <div class="container">
-    <div class = "jumbotron bg-dark" style="margin-top: 100px;">
-        <h1 style="color: whitesmoke;">Login</h1>
-        <form action="/login/" method="POST">{% csrf_token %}
-            <table style="color: whitesmoke;">
-                {{ login_form.as_table }}
-                <tr>
-                    <td>
-                        <input type="submit" class="btn btn-primary" value = "Login"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                </br>
-                <p style="margin-bottom: 0px; color: whitesmoke;">Not a member?</p>
-                      <p style="color: whitesmoke;"> Click <a href="/join">here</a> to join.</p>
-                    </td>
-                </tr>
-            </table>
-        </form>
+    <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
+            <div class = "jumbotron bg-dark" style="margin-top: 100px; padding-top: 40px; padding-bottom: 30px; opacity: 0.96;">
+                <h1 style="color: whitesmoke;">Login</h1>
+                <form action="/login/" method="POST">{% csrf_token %}
+                    <table style="color: whitesmoke;">
+                    {{ login_form.as_table }}
+                        <tr>
+                            <td>
+                                <input type="submit" class="btn btn-primary" value = "Login"/>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td>
+                            </br>
+                            <p style="margin-bottom: 0px; color: whitesmoke;">Not a member?</p>
+                            <p style="color: whitesmoke;"> Click <a href="/join">here</a> to join.</p>
+                        </td>
+                    </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
     </div>
 </div>
 </html>

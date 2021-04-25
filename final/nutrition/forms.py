@@ -14,9 +14,9 @@ class NutritionEntryForm(forms.ModelForm):
 	description = forms.CharField(widget=forms.TextInput(attrs={'size': '80'}))
 	category  = forms.CharField(widget=forms.Select(choices=TASKS_CHOICES)) 
 	calories = forms.IntegerField()
-	protein = forms.IntegerField()
-	fats = forms.IntegerField()
-	carbs = forms.IntegerField()
+	protein = forms.IntegerField(required=False)
+	fats = forms.IntegerField(required=False)
+	carbs = forms.IntegerField(required=False)
 	class Meta():
 		model = NutritionEntry
 		fields = ('description', 'category', 'calories', 'protein', 'fats', 'carbs')

@@ -4,37 +4,34 @@ from django.contrib.auth.decorators import login_required
 from nutrition.models import NutritionEntry
 from nutrition.forms import NutritionEntryForm
 from django.contrib.auth.models import User
+from django.db.models import Sum
 # Create your views here.
 
 
 @login_required(login_url='/login/')
 def nutrition(request):
-	switch=0
-	if (request.method == "GET" and "toggle_completed" in request.GET):
-		id = request.GET["toggle_completed"]
-		nutritionEntry = NutritionEntry.objects.get(id=id)
-		nutritionEntry.completed = not nutritionEntry.completed
-		nutritionEntry.save()
-		return redirect("/nutrition/")
 	if (request.method == "GET" and "delete" in request.GET):
 		id = request.GET["delete"]
 		NutritionEntry.objects.filter(id=id).delete()
 		return redirect("/nutrition/")
 	if (request.method == "GET" and "switch" in request.GET):
-		nutrition_data = NutritionEntry.objects.filter(user=request.user)
-		for x in nutrition_data:
-			if(x.completed == True):
-				x.switcharoo = not x.switcharoo
-				x.save()
+		table_data = NutritionEntry.objects.filter(user=request.user)
+		nutrition = NutritionEntry.objects.filter(user=request.user)
+		res = nutrition.aggregate(sum = Sum('calories'))['sum']
+		switch = request.GET["switch"]
 		context = {
-		"nutrition_data": nutrition_data
+		"table_data": table_data,
+		"switch": switch,
+		"res": res,
 		}
-		render(request, 'nutrition/nutrition.html', context)
-		return redirect('/nutrition/')
+		return render(request, 'nutrition/nutrition.html', context)
 	else:
 		table_data = NutritionEntry.objects.filter(user=request.user)
+		nutrition = NutritionEntry.objects.filter(user=request.user)
+		res = nutrition.aggregate(sum = Sum('calories'))['sum']
 		context = {
-		"table_data": table_data
+		"table_data": table_data,
+		"res": res,
 		}
 		return render(request, 'nutrition/nutrition.html', context)
 

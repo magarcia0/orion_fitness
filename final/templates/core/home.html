@@ -2,44 +2,83 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Organizer</title>
+    <title>Orion Fitness</title>
     {% include "bootstrap.html" %}
     {% load static %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script src="{%static 'common.js' %}" />
     </script>
-          <style>
-            body {
-               background-image: url("/static/bg.jpg");
-               background-size: cover;
+    <style>
+        body {
+            background-image: url("/static/bg.jpg");
+            background-size: cover;
+        }
+
+        h1 {
+            animation: pulse 3.2s;
+        }
+
+        .jumbotron {
+            animation: pulse 3.2s;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity:  0%;
             }
-         </style>
+
+            100% {
+                opacity: 98%;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
     {% include "navbar.html" %}
     <br />
     {% if user.is_authenticated %}
-    
-    <h1 style="text-align: center;">Welcome to Fitness App, {{ user.get_full_name }}</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+            </div>
+                <div class="col-sm-8">
+                    <div class="jumbotron"
+                        style="margin-top: 8px; padding-bottom: 1%; padding-top: 0%; font-family: 'Pacifico', cursive; background-color: rosybrown; border-color: rosybrown; border-width: .5px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.85;">
+                        <span>
+                        <h1 style="text-align: center; color: whitesmoke;">Welcome to Orion Fitness {{ user.get_full_name }}
+                        </h1>
+                        </span>
+                    </div>
+                </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+    </div>
     {% endif %}
     <br />
     <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="jumbotron bg-dark">
-                    <h1 style="color: whitesmoke;">Workout</h1>
-                    <p style="color: whitesmoke;">No workout data to display.</p>
+        <div class="row" style="margin-top: 70px;">
+            <div class="col-sm-5">
+                <div class="jumbotron bg-dark"
+                    style="border-style: solid; border-width: 0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.96;">
+                    <h1 style="color: whitesmoke; font-family: 'Fredoka One', cursive;">Exercise</h1>
+                    <p style="color: whitesmoke;">No Exercise data to display.</p>
                     <form method="GET" action="/workout/add/">
-                        <input type="submit" class="btn btn-primary" value="Add Workout Entry">
+                        <input type="submit" class="btn btn-primary" value="Add Exercise Entry">
                     </form>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="jumbotron bg-dark">
-                    <h1 style="color: whitesmoke;">Nutrition</h1>
-                    <p style="color: whitesmoke;">There are no nutrition entries to display.</p>
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-5">
+                <div class="jumbotron bg-dark"
+                    style="border-style: solid; border-width: 0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.96;">
+                    <h1 style="color: whitesmoke; font-family: 'Fredoka One', cursive;">Nutrition</h1>
+                    <p style="color: whitesmoke;">No Nutrition data to display.</p>
                     <form method="GET" action="/nutrition/add/">
                         <input type="submit" class="btn btn-primary" value="Add Nutrition Entry">
                     </form>
