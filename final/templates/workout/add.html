@@ -4,10 +4,18 @@
   <meta charset="utf-8">
   <title>Add Exercise</title>
   {% include "bootstrap.html" %}
+  <style>
+		body {
+			background-image: url("/static/bar.jpg");
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		}
+	</style>
 </head>
 <body>
   {% include "navbar.html" %}
-  <div class="jumbotron">
+	<div class="jumbotron" style="margin-top: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.92;">
     <h1>Add Exercise Entry</h1>
     <form method="POST">
       {% csrf_token %}

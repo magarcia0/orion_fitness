@@ -4,10 +4,20 @@
   <title>Exercise</title>
   {% include "bootstrap.html" %}
 	{% load static %}
-	<script src="{%static 'common.js' %}" /></script>
+	<script src="{%static 'common.js' %}"></script>
+	<style>
+		body {
+			background-image: url("/static/bar.jpg");
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		}
+	</style>
 </head>
-<body style="background-image: url('/static/bar.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 120%; ">
+<body>
+	<div style="opacity: 0.90;">
   {% include "navbar.html" %}
+	</div>
 	<div class="jumbotron" style="margin-top: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.92;">
 	  <h1>Exercise Journal</h1>
 	  {% if not table_data %}
@@ -17,30 +27,36 @@
 	    <tr>
 	      <th style="border: 10px;">Description</th>
 	      <th style="border-top: 10px;">Category</th>
-	      <th style="border: 10px;">Projected</th>
-	      <th style="border-top: 10px;">Actual</th>
+	      <th style="border: 10px;">Projected Time</th>
+	      <th style="border-top: 10px;">Actual Time</th>
 	      <th style="border: 10px;">Action</th>
 	    </tr>
 	    {% for row in table_data %}
 	    	<tr>
-	      	<td>{{ row.description }}</td>
+	      	<td>{{ row.exercise }}</td>
 	      	<td>{{ row.category }}</td>
-	      	<td>{{ row.projected }}</td>
-	      	<td>{{ row.actual }}</td>
+	      	<td>{{ row.projected }} hr</td>
+	      	<td>{{ row.actual }} hr 
+		{% if row.res > 0 and row.res != 1 %}
+		<p style="color: green; margin-top: 5px;">WOW! You smashed your goal! You worked out an extra {{ row.res }} hrs!</p>
+		{% elif row.res < 0 %}
+		<p style="color: red; margin-top: 5px;">Missed the mark by {{ row.res }} hrs. Try harder next time wimp!</p>
+		{% else %}
+		<p style="color: green; margin-top: 5px;">Great Job! You hit your time goal!</p>
+		{% endif %}
+		{% if row.res == 1 %}
+		<p style="color: green; margin-top: 5px;">WOW! You smashed your goal! You worked out an extra {{ row.res }} hrs!</p>
+		{% elif row.res == -1%}
+		<p style="color: red; margin-top: 5px;">Missed the mark by {{ row.res }} hr. Try harder next time wimp!</p>
+		{% endif %}
+			  </td>
 	      	<td>
 	        	<a class="btn btn-primary" href="/workout/edit/{{ row.id }}/">Edit</a>
 	        	<a class="btn btn-primary" href="#" onclick="confirmDeleteModal({{ row.id }})">Delete</a>
-					</td>
-				</tr>
+			</td>
+		</tr>
 	    {% endfor %}
 		  </table>
-		{% endif %}
-	  {% if res > 0 %}
-		<p style="color: green;">There is a workout surplus of ${{ res }}</p>
-		{% elif res < 0 %}
-		<p style="color: red;">There is a workout deficit of ${{ res }}</p>
-		{% else %}
-		<p style="color: blue;">No workout surplus or deficit ${{ res }}</p>
 		{% endif %}
 	  <form method="GET" action="/workout/add/">
 	    <input type="submit" class="btn btn-primary" value = "Add Exercise Entry">

@@ -17,15 +17,10 @@ def workout(request):
 	else:
 		table_data = WorkoutEntry.objects.filter(user=request.user)
 		workout = WorkoutEntry.objects.filter(user=request.user)
-		sum_projected = workout.aggregate(projectedsum = Sum('projected'))['projectedsum'] if workout else 0
-		sum_actual = workout.aggregate(actualsum = Sum('actual'))['actualsum'] if workout else 0
-		if((sum_actual >= 0 and sum_projected >= 0)):
-			res = sum_projected-sum_actual
-		elif(sum_actual < 0 or sum_projected < 0):
-			res = sum_projected+sum_actual
+		for x in table_data:
+			x.res = x.actual - x.projected
 		context = {
 		"table_data": table_data,
-		"res": res,
 		}
 		return render(request, 'workout/workout.html', context)
 
@@ -35,12 +30,12 @@ def add(request):
 		if ("add" in request.POST):
 			add_form = WorkoutEntryForm(request.POST)
 			if (add_form.is_valid()):
-				description = add_form.cleaned_data["description"]
+				exercise = add_form.cleaned_data["exercise"]
 				category = add_form.cleaned_data["category"]
 				projected = add_form.cleaned_data["projected"]
 				actual = add_form.cleaned_data["actual"]
 				user = User.objects.get(id=request.user.id)
-				WorkoutEntry(user = user, description=description, category=category, projected=projected, actual=actual).save()
+				WorkoutEntry(user = user, exercise=exercise, category=category, projected=projected, actual=actual).save()
 				return redirect("/workout/")
 			else:
 				context = {

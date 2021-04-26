@@ -1,20 +1,22 @@
 from django import forms
 from workout.models import WorkoutEntry
 
-BUDGET_CHOICES= [
-    ('Food', 'Food'),
-    ('Clothing', 'Clothing'),
-    ('Housing', 'Housing'),
-    ('Education', 'Education'),
-    ('Entertainment', 'Entertainment'),
+WORKOUT_CHOICES = [
+    ('-------', '-------'),
+    ('Cardio', 'Cardio'),
+    ('Cross-fit', 'Cross-fit'),
+    ('Free Weights', 'Free Weights'),
+    ('Lower-Body', 'Lower-Body'),
+    ('Upper-Body', 'Upper-Body'),
+    ('Yoga', 'Yoga'),
     ('Other', 'Other'),
-    ]
+]
 
 class WorkoutEntryForm(forms.ModelForm):
-	description = forms.CharField(widget=forms.TextInput(attrs={'size': '80'}))
-	category  = forms.CharField(widget=forms.Select(choices=BUDGET_CHOICES)) 
-	projected = forms.IntegerField()
-	actual = forms.IntegerField()
+	exercise = forms.CharField(label='Description', widget=forms.TextInput(attrs={'size': '80'}))
+	category  = forms.CharField(widget=forms.Select(choices=WORKOUT_CHOICES)) 
+	projected = forms.DecimalField(label='Projected Time')
+	actual = forms.DecimalField(label='Actual Time')
 	class Meta():
 		model = WorkoutEntry
-		fields = ('description', 'category', 'projected', 'actual')
+		fields = ('exercise', 'category', 'projected', 'actual')

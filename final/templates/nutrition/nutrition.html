@@ -57,9 +57,27 @@
 				<td>{{ row.description }}</td>
 				<td>{{ row.category }}</td>
 				<td>{{ row.calories }}</td>
-				<td>{{ row.protein }}</td>
-				<td>{{ row.fats }}</td>
-				<td>{{ row.carbs }}</td>
+				{% if row.fats and row.carbs and row.protein %}
+				<td>{{ row.protein }} g</td>
+				<td>{{ row.fats }} g</td>
+				<td>{{ row.carbs }} g</td>
+				{% elif row.fats and not row.carbs and not row.protein %}
+				<td>--</td>
+				<td>{{ row.fats }} g</td>
+				<td>--</td>
+				{% elif not row.fats and not row.carbs and row.protein %}
+				<td>{{ row.protein }} g</td>
+				<td>--</td>
+				<td>--</td>
+				{% elif not row.fats and row.carbs and not row.protein %}
+				<td>--</td>
+				<td>--</td>
+				<td>{{ row.carbs }} g</td>
+				{% else %}
+				<td>--</td>
+				<td>--</td>
+				<td>--</td>
+				{% endif %}
 			<td>
 				<a class="btn btn-primary" href="/nutrition/edit/{{ row.id }}/">Edit</a>
 				<a class="btn btn-primary" href="#" onclick="confirmDeleteModal({{ row.id }})">Delete</a>
