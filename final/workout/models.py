@@ -20,3 +20,4 @@ class WorkoutEntry(models.Model):
     projected = models.DecimalField(decimal_places=1, max_digits=99)
     actual = models.DecimalField(decimal_places=1, max_digits=99)
     res = models.DecimalField(default=0.0, decimal_places=1, max_digits=99)
+    date = models.DateField(auto_now=True)

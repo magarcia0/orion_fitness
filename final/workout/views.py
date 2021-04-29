@@ -10,6 +10,8 @@ from django.db.models import Sum
 
 @login_required(login_url='/login/')
 def workout(request):
+	db_actual = []
+	db_projected = []
 	if (request.method == "GET" and "delete" in request.GET):
 		id = request.GET["delete"]
 		WorkoutEntry.objects.filter(id=id).delete()
@@ -19,8 +21,12 @@ def workout(request):
 		workout = WorkoutEntry.objects.filter(user=request.user)
 		for x in table_data:
 			x.res = x.actual - x.projected
+			db_actual.append(str(x.actual))
+			db_projected.append(str(x.projected))
 		context = {
 		"table_data": table_data,
+		"db_actual": db_actual,
+		"db_projected": db_projected,
 		}
 		return render(request, 'workout/workout.html', context)
 
@@ -77,12 +83,3 @@ def edit(request, id):
 		else:
 			#Cancel
 			return redirect("/workout/")
-
-def data(request):
-	if (request.method == "GET"):
-		id = request.GET["retrieve_budget"]
-		workoutEntry = WorkoutEntry.objects.get(id=id)
-		proj = workoutEntry.projected
-		act = workoutEntry.actual
-		result = proj - act
-		return render(request, 'tasks/tasks.html', result)

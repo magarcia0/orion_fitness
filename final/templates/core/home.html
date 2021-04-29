@@ -2,12 +2,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Orion Fitness</title>
-    {% include "bootstrap.html" %}
+    <title>Orion Wellness</title>
     {% load static %}
+    {% include "bootstrap.html" %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-    <script src="{%static 'common.js' %}" />
+    <script src="{% static 'common.js' %}"></script>
+    <script src="{% static 'global.css' %}"></script>
     </script>
     <style>
         body {
@@ -15,26 +16,36 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-position: center
+            background-position: center;
         }
 
         h1 {
-            animation: pulse 3.2s;
+            animation: pulse 3.1s;
         }
 
         .jumbotron {
-            animation: pulse 3.2s;
+            animation: pulse 3.1s;
         }
 
         @keyframes pulse {
             0% {
-                opacity:  0%;
+                opacity: 0%;
             }
 
             100% {
                 opacity: 98%;
             }
         }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 8%;
+        }
+
+
     </style>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -42,53 +53,132 @@
 
 <body>
     {% include "navbar.html" %}
+    <div style="font-size: x-small; text-align: right;">
+        Inspirational quotes provided by <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a>
+    </div>
     <br />
     {% if user.is_authenticated %}
     <div class="container">
         <div class="row">
             <div class="col-sm-2">
             </div>
-                <div class="col-sm-8">
-                    <div class="jumbotron"
-                        style="margin-top: 8px; padding-bottom: 1%; padding-top: 0%; font-family: 'Pacifico', cursive; background-color: rosybrown; border-color: rosybrown; border-width: .5px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.85;">
-                        <span>
-                        <h1 style="text-align: center; color: whitesmoke;">Welcome to Orion Fitness {{ user.get_full_name }}
+            <div class="col-sm-8">
+                <div style="margin-top: 8px; padding-bottom: 1%; padding-top: 0%; font-family: 'Pacifico', cursive;">
+                    <span>
+                        <h1 style="text-align: center; color: white;">Welcome to Orion Wellness {{user.get_full_name }}
                         </h1>
-                        </span>
-                    </div>
+                    </span>
                 </div>
+            </div>
             <div class="col-sm-2">
             </div>
         </div>
     </div>
     {% endif %}
     <br />
-    <div class="container h-100">
-        <div class="row" style="margin-top: 70px;">
-            <div class="col-sm-5">
-                <div class="jumbotron bg-dark"
-                    style="border-style: solid; border-width: 0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.96;">
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-sm-4">
+                <div class="jumbotron bg-dark" style="z-index: -1; margin-left: 150px; border-style: solid; text-align: center; border-width: 0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.98;">
                     <h1 style="color: whitesmoke; font-family: 'Fredoka One', cursive;">Exercise</h1>
-                    <p style="color: whitesmoke;">No Exercise data to display.</p>
+                    {% if work_count != 0 %}
+                    <div class="ct-chart ct-perfect-fourth" id="chart1"></div>
+                    <script>
+                        var data = {
+                            labels: [],
+                            series: [
+                                {{ db_projected|safe }},
+                                {{ db_actual|safe }},
+                            ]
+                        };
+
+                        var options = {
+                            seriesBarDistance: 10
+                        };
+
+                        var responsiveOptions = [
+                            ['screen and (max-width: 640px)', {
+                                seriesBarDistance: 5,
+                                axisX: {
+                                    labelInterpolationFnc: function (value) {
+                                        return value[0];
+                                    }
+                                }
+                            }]
+                        ];
+
+                        new Chartist.Bar('#chart1', data, options, responsiveOptions);
+                    </script>
+                    <div style="margin-top: auto; color: whitesmoke;">Projected/Actual</div>
+                    <p style=" font-size: small; color: whitesmoke;"><a href="/workout/">Go to entries</a></p>
                     <form method="GET" action="/workout/add/">
                         <input type="submit" class="btn btn-primary" value="Add Exercise Entry">
                     </form>
+                    {% else %}
+                    <p style="color: whitesmoke;">You have <span style="color: rgb(6, 184, 216);">0</span> entries </p>
+                    <form method="GET" action="/workout/add/">
+                        <input type="submit" class="btn btn-primary" value="Add Exercise Entry">
+                    </form>
+                    {% endif %}
                 </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-4">
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <div class="jumbotron bg-dark"
-                    style="border-style: solid; border-width: 0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.96;">
-                    <h1 style="color: whitesmoke; font-family: 'Fredoka One', cursive;">Nutrition</h1>
-                    <p style="color: whitesmoke;">No Nutrition data to display.</p>
+                    style=" margin-right: 150px; text-align: center; border-style: solid; border-width: 0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.98;">
+                    <h1 style="text-align: center; color: whitesmoke; font-family: 'Fredoka One', cursive;">Nutrition</h1>
+                    {% if nutrition_count != 0 %}
+                    <div class="ct-chart ct-perfect-fourth" id="chart2"></div>
+                    <script>
+                        var data = {
+                            labels: [],
+                            series: [
+                                {{ consumed|safe }},
+                                {{ goal|safe }},
+                            ]
+                        };
+
+                        var options = {
+                            seriesBarDistance: 10
+                        };
+
+                        var responsiveOptions = [
+                            ['screen and (max-width: 640px)', {
+                                seriesBarDistance: 5,
+                                axisX: {
+                                    labelInterpolationFnc: function (value) {
+                                        return value[0];
+                                    }
+                                }
+                            }]
+                        ];
+
+                        new Chartist.Bar('#chart2', data, options, responsiveOptions);;
+                    </script>
+
+
+                    <div style="margin-top: auto; color: whitesmoke;">Consumed/Goal</div>
+                    <p style=" font-size: small; color: whitesmoke;"> <a href="/nutrition/">Go to entries</a></p>
                     <form method="GET" action="/nutrition/add/">
                         <input type="submit" class="btn btn-primary" value="Add Nutrition Entry">
                     </form>
+                    {% else  %}
+                    <p style="color: whitesmoke;">You have <span style="color: rgb(6, 184, 216);">0</span> entries </p>
+                    <form method="GET" action="/nutrition/add/">
+                        <input type="submit" class="btn btn-primary" value="Add Nutrition Entry">
+                    </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </body>
-
+{% for x in api_data %}
+<div class="footer" style="margin-top: 8px; z-index: auto; padding-bottom: 1%; padding-top: 0%; text-align: center; font-size: large; font-family: 'Fredoka One', cursive; background-color: rosybrown; border-color: rosybrown; border-width: .5px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.90;">
+    <span>
+        <blockquote style="color: whitesmoke;">&ldquo;{{ x.q }} &rdquo; <footer>&mdash; {{ x.a }}</footer>
+        </blockquote>
+   </span>
+</div>
+{% endfor %}
 </html>

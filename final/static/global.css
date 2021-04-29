@@ -1,9 +1,7 @@
-.jumbotron{
-  opacity: 0.5;
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
-  background-size: cover;
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
-.jumbo_text {
-  color: white;
-}

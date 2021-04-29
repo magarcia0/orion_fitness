@@ -1,10 +1,13 @@
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <title>Exercise</title>
-  {% include "bootstrap.html" %}
+	<meta charset="utf-8">
+	<title>Exercise</title>
+	{% include "bootstrap.html" %}
 	{% load static %}
 	<script src="{%static 'common.js' %}"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+	<script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 	<style>
 		body {
 			background-image: url("/static/bar.jpg");
@@ -14,73 +17,78 @@
 		}
 	</style>
 </head>
+
 <body>
 	<div style="opacity: 0.90;">
-  {% include "navbar.html" %}
+		{% include "navbar.html" %}
 	</div>
-	<div class="jumbotron" style="margin-top: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.92;">
-	  <h1>Exercise Journal</h1>
-	  {% if not table_data %}
-	  	</p>There are no exercise entries to display.</p>
-	  {% else %}
-			<table class="table table-striped" border="1" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-	    <tr>
-	      <th style="border: 10px;">Description</th>
-	      <th style="border-top: 10px;">Category</th>
-	      <th style="border: 10px;">Projected Time</th>
-	      <th style="border-top: 10px;">Actual Time</th>
-	      <th style="border: 10px;">Action</th>
-	    </tr>
-	    {% for row in table_data %}
-	    	<tr>
-	      	<td>{{ row.exercise }}</td>
-	      	<td>{{ row.category }}</td>
-	      	<td>{{ row.projected }} hr</td>
-	      	<td>{{ row.actual }} hr 
-		{% if row.res > 0 and row.res != 1 %}
-		<p style="color: green; margin-top: 5px;">WOW! You smashed your goal! You worked out an extra {{ row.res }} hrs!</p>
-		{% elif row.res < 0 %}
-		<p style="color: red; margin-top: 5px;">Missed the mark by {{ row.res }} hrs. Try harder next time wimp!</p>
+	<div class="jumbotron"
+		style="margin-top: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.92;">
+		<h1>Exercise Journal</h1>
+		{% if not table_data %}
+		</p>There are no exercise entries to display.</p>
 		{% else %}
-		<p style="color: green; margin-top: 5px;">Great Job! You hit your time goal!</p>
+		<table class="table table-striped" border="1"
+			style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+			<tr>
+				<th style="border-top: 10px;">Date</th>
+				<th style="border: 10px;">Description</th>
+				<th style="border-top: 10px;">Category</th>
+				<th style="border: 10px;">Projected Time</th>
+				<th style="border-top: 10px;">Actual Time</th>
+				<th style="border: 10px;">Action</th>
+			</tr>
+			{% for row in table_data %}
+			<tr>
+				<td>{{ row.date }}</td>
+				<td>{{ row.exercise }}</td>
+				<td>{{ row.category }}</td>
+				<td>{{ row.projected }} hr</td>
+				<td>{{ row.actual }} hr
+					{% if row.res > 0 and row.res != 1 %}
+					<p style="color: green; margin-top: 5px;">WOW! You smashed your goal! You worked out an extra {{
+						row.res }} hrs!</p>
+					{% elif row.res < 0 %} <p style="color: red; margin-top: 5px;">Missed the mark by {{ row.res }} hrs.
+						Try harder next time wimp!</p>
+						{% else %}
+						<p style="color: green; margin-top: 5px;">Great Job! You hit your time goal!</p>
+						{% endif %}
+						{% if row.res == 1 %}
+						<p style="color: green; margin-top: 5px;">WOW! You worked out an extra {{ row.res }} hrs!</p>
+						{% endif %}
+				</td>
+				<td>
+					<a class="btn btn-primary" href="/workout/edit/{{ row.id }}/">Edit</a>
+					<a class="btn btn-primary" href="#" onclick="confirmDeleteModal({{ row.id }})">Delete</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
 		{% endif %}
-		{% if row.res == 1 %}
-		<p style="color: green; margin-top: 5px;">WOW! You smashed your goal! You worked out an extra {{ row.res }} hrs!</p>
-		{% elif row.res == -1%}
-		<p style="color: red; margin-top: 5px;">Missed the mark by {{ row.res }} hr. Try harder next time wimp!</p>
-		{% endif %}
-			  </td>
-	      	<td>
-	        	<a class="btn btn-primary" href="/workout/edit/{{ row.id }}/">Edit</a>
-	        	<a class="btn btn-primary" href="#" onclick="confirmDeleteModal({{ row.id }})">Delete</a>
-			</td>
-		</tr>
-	    {% endfor %}
-		  </table>
-		{% endif %}
-	  <form method="GET" action="/workout/add/">
-	    <input type="submit" class="btn btn-primary" value = "Add Exercise Entry">
-	  </form>
+		<form method="GET" action="/workout/add/">
+			<input type="submit" class="btn btn-primary" value="Add Exercise Entry">
+		</form>
 	</div>
 
-  <!-- Modal -->
-  <div id="deleteModal" class="modal fade" role='dialog'>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title">Delete Exercise Entry</h4>
-        </div>
-        <div class="modal-body">
-          <p>Do you really want to delete this Exercise Entry?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <span id= 'deleteButton'></span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--Modal ends here--->
+	<!-- Modal -->
+	<div id="deleteModal" class="modal fade" role='dialog' data-backdrop="false">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Delete Exercise Entry</h4>
+				</div>
+				<div class="modal-body">
+					<p>Do you really want to delete this Exercise Entry?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<span id='deleteButton'></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Modal ends here--->
 </body>
+
 </html>

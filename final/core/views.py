@@ -6,12 +6,48 @@ from django.contrib.auth.decorators import login_required
 from core.forms import JoinForm, LoginForm
 from django.contrib.auth.models import User
 from core.models import UserProfile
+from django.core.cache import cache
+import requests
+import json
+from workout.models import WorkoutEntry
+from nutrition.models import NutritionEntry
+import random
+import time
 
 # Create your views here.
 
 @login_required(login_url='/login/')
 def home(request):
-    return render(request, 'core/home.html/')
+    work_count = 0
+    nutrition_count = 0
+    db_actual = []
+    db_projected = []
+    consumed = []
+    goal = []
+    url = 'https://zenquotes.io/api/quotes/'
+    quote_library = requests.get(url).json()
+    api_data = random.sample(quote_library, 1)
+    workout_data = WorkoutEntry.objects.filter(user=request.user)
+    nutrition_data = NutritionEntry.objects.filter(user=request.user)
+    work_count = len(workout_data) / 2
+    for x in workout_data:
+        work_count = work_count + 1
+        db_actual.append(str(x.actual))
+        db_projected.append(str(x.projected))
+    for idx in nutrition_data:
+        nutrition_count = nutrition_count + 1
+        consumed.append(str(idx.calories))
+        goal.append(str(idx.calories_goal))
+    context = {
+        'api_data': api_data,
+        'work_count': work_count,
+        'nutrition_count': nutrition_count,
+        'db_actual': db_actual,
+        'db_projected': db_projected,
+        'consumed': consumed,
+        'goal': goal,
+    }
+    return render(request, 'core/home.html/', context)
 
 def about(request):
     return render(request, 'core/about.html')

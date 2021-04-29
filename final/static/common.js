@@ -7,3 +7,4 @@ function confirmDeleteModal(id) {
     $('#deleteModal').modal('hide');
     return true
   }
+

@@ -29,6 +29,8 @@ def nutrition(request):
 		table_data = NutritionEntry.objects.filter(user=request.user)
 		nutrition = NutritionEntry.objects.filter(user=request.user)
 		res = nutrition.aggregate(sum = Sum('calories'))['sum']
+		for x in table_data:
+			x.grand_calories = x.calories_goal - x.calories
 		context = {
 		"table_data": table_data,
 		"res": res,
@@ -44,11 +46,12 @@ def add(request):
 				description = add_form.cleaned_data["description"]
 				category = add_form.cleaned_data["category"]
 				calories = add_form.cleaned_data["calories"]
+				calories_goal = add_form.cleaned_data["calories_goal"]
 				protein = add_form.cleaned_data["protein"]
 				fats = add_form.cleaned_data["fats"]
 				carbs = add_form.cleaned_data["carbs"]
 				user = User.objects.get(id=request.user.id)
-				NutritionEntry(user = user, description=description, category=category, calories=calories, protein=protein, fats=fats, carbs=carbs).save()
+				NutritionEntry(user = user, description=description, category=category, calories=calories, calories_goal=calories_goal, protein=protein, fats=fats, carbs=carbs).save()
 				return redirect("/nutrition/")
 			else:
 				context = {
@@ -98,17 +101,3 @@ def toggle(request, id):
 		nutrition.completed = not nutrition.completed 
 		nutritionEntry.save()
 	return redirect("/nutrition/")
-
-def pie_chart(request):
-	c_counter = 0
-	p_counter = 0
-	dataSet = NutritionEntry.objects.filter(user=request.user)
-	for x in dataSet:
-		if(x.completed == True):
-			c_counter = c_counter + 1
-		else:
-			p_ccounter = p_counter + 1
-	return render(request, 'core/home.html/', {
-		'c_counter': c_counter,
-		'p_counter': p_counter,
-	})

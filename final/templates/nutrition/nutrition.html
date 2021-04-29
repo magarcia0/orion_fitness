@@ -27,6 +27,7 @@
 					Hide Macros
 				</label>
 			</a>
+
 		{% else %}
 			<a href="/nutrition/">
 				<label class="btn btn-secondary btn-sm">
@@ -45,11 +46,12 @@
 				<th style="border-top: 10px;">Date</th>
 				<th style="border: 10px;">Description</th>
 				<th style="border-top: 10px;">Category</th>
-				<th style="border: 10px;">Calories</th>
-				<th style="border-top: 10px; background-color: #bcc2e0;">Protein</th>
-				<th style="border: 10px; background-color: #bcc2e0;">Fats</th>
-				<th style="border-top: 10px; background-color: #bcc2e0;">Carbs</th>
-				<th style="border: 10px;">Action</th>
+				<th style="border: 10px;">Total Calories</th>
+				<th style="border-top: 10px;">Calorie Goal</th>
+				<th style="border: 10px; background-color: #bcc2e0;">Protein</th>
+				<th style="border-top: 10px; background-color: #bcc2e0;">Fats</th>
+				<th style="border: 10px; background-color: #bcc2e0;">Carbs</th>
+				<th style="border-top: 10px;">Action</th>
 			</tr>
 			{% for row in table_data %}
 			<tr>
@@ -57,6 +59,13 @@
 				<td>{{ row.description }}</td>
 				<td>{{ row.category }}</td>
 				<td>{{ row.calories }}</td>
+				<td>{{ row.calories_goal }}
+				{% if row.grand_calories == 0 %} <p style="color: blue; margin-top: 5px;"> You hit your Goal.</p>
+				{% elif row.grand_calories < 0 %} <p style="color: blue; margin-top: 5px;"> You went under your goal.</p>
+				{% else %}
+				<p style="color: green; margin-top: 5px;">Oops! You went over your calorie goal. Fatso!</p>
+				{% endif %}
+				</td>
 				{% if row.fats and row.carbs and row.protein %}
 				<td>{{ row.protein }} g</td>
 				<td>{{ row.fats }} g</td>
@@ -90,7 +99,8 @@
 				<th style="border: 10px;">Description</th>
 				<th style="border-top: 10px;">Category</th>
 				<th style="border: 10px;">Calories</th>
-				<th style="border-top: 10px;">Action</th>
+				<th style="border-top: 10px;">Calorie Goal</th>
+				<th style="border: 10px;">Action</th>
 			</tr>
 			{% for row in table_data %}
 			<tr>
@@ -98,6 +108,7 @@
 				<td>{{ row.description }}</td>
 				<td>{{ row.category }}</td>
 				<td>{{ row.calories }}</td>
+				<td>{{ row.calories_goal }}</td>
 				<td>
 				<a class="btn btn-primary" href="/nutrition/edit/{{ row.id }}/">Edit</a>
 				<a class="btn btn-primary" href="#" onclick="confirmDeleteModal({{ row.id }})">Delete</a>
@@ -110,18 +121,17 @@
 		<form method="GET" action="/nutrition/add/">
 			<input type="submit" class="btn btn-primary" value="Add Nutrition Entry">
 		</form>
-		<p> Total Calories: {{res}} </p>
 	</div>
 
 	<!-- Modal -->
-	<div id="deleteModal" class="modal fade" role='dialog'>
+	<div id="deleteModal" class="modal fade" role='dialog' data-backdrop="false">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title">Delete Nutrition Entry</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" >
 					<p>Do you really want to delete this Nutrition Entry?</p>
 				</div>
 				<div class="modal-footer">
