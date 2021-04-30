@@ -46,7 +46,7 @@
 				<th style="border-top: 10px;">Date</th>
 				<th style="border: 10px;">Description</th>
 				<th style="border-top: 10px;">Category</th>
-				<th style="border: 10px;">Total Calories</th>
+				<th style="border: 10px;">Calories</th>
 				<th style="border-top: 10px;">Calorie Goal</th>
 				<th style="border: 10px; background-color: #bcc2e0;">Protein</th>
 				<th style="border-top: 10px; background-color: #bcc2e0;">Fats</th>
@@ -61,7 +61,7 @@
 				<td>{{ row.calories }}</td>
 				<td>{{ row.calories_goal }}
 				{% if row.grand_calories == 0 %} <p style="color: blue; margin-top: 5px;"> You hit your Goal.</p>
-				{% elif row.grand_calories < 0 %} <p style="color: blue; margin-top: 5px;"> You went under your goal.</p>
+				{% elif row.grand_calories > 0 %} <p style="color: blue; margin-top: 5px;"> You went under your goal.</p>
 				{% else %}
 				<p style="color: green; margin-top: 5px;">Oops! You went over your calorie goal. Fatso!</p>
 				{% endif %}

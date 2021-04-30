@@ -46,16 +46,18 @@
 				<td>{{ row.projected }} hr</td>
 				<td>{{ row.actual }} hr
 					{% if row.res > 0 and row.res != 1 %}
-					<p style="color: green; margin-top: 5px;">WOW! You smashed your goal! You worked out an extra {{
-						row.res }} hrs!</p>
-					{% elif row.res < 0 %} <p style="color: red; margin-top: 5px;">Missed the mark by {{ row.res }} hrs.
-						Try harder next time wimp!</p>
-						{% else %}
-						<p style="color: green; margin-top: 5px;">Great Job! You hit your time goal!</p>
-						{% endif %}
-						{% if row.res == 1 %}
-						<p style="color: green; margin-top: 5px;">WOW! You worked out an extra {{ row.res }} hrs!</p>
-						{% endif %}
+					<p style="color: green; margin-top: 5px;">WOW! You smashed your goal! You worked out an extra {{row.res }} hrs!</p>
+					{% elif row.res < 0 %}
+					<p style="color: red; margin-top: 5px;">Missed the mark by {{ row.res }} hrs.Try harder next time wimp!</p>
+					{% elif row.res == 0 %}
+					<p style="color: green; margin-top: 5px;">Great Job! You hit your time goal!</p>
+					{% endif %}
+					{% if row.res == 1 %}
+					<p style="color: green; margin-top: 5px;">WOW! You worked out an extra {{ row.res }} hrs!</p>
+					{% endif %}
+					{% if row.projected == 0 and row.actual == 0 %}
+					<p style="color: green; margin-top: 5px;">Wait a minute...</p>
+					{% endif %}
 				</td>
 				<td>
 					<a class="btn btn-primary" href="/workout/edit/{{ row.id }}/">Edit</a>
