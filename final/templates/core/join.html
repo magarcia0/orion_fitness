@@ -3,6 +3,7 @@
 <head>
     {% include "bootstrap.html" %}
     {% load static %}
+    {% include "navbar.html" %}
     <style>
         body {
             background-image: url("/static/self.jpg");
@@ -15,13 +16,12 @@
 </head>
 
 <body>
-    {% include "navbar.html" %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-md-2">
             </div>
-            <div class="col-sm-8" style="padding-right: 150px;">
-            <div class = "jumbotron jumbo_text bg-dark" style="margin-top: 180px; margin-left: 50px; padding-top: 40px; padding-bottom: 30px; opacity: 0.96;">
+            <div class="col-md-8" style="padding-right: auto;">
+            <div class = "jumbotron bg-dark" style="align-self: center; margin-top: 180px; margin-left: auto; padding-top: 40px; padding-bottom: 30px; opacity: 0.96;">
                 <h1 style="color: whitesmoke;">Join</h1>
                 <form method="POST">{% csrf_token %}
                     <table style="color: whitesmoke; padding: auto;">
@@ -36,7 +36,7 @@
                     </table>
                 </form>
             </div>
-            <div class="col-sm-2">
+            <div class="col-md-2">
         </div>
         </div>
     </div>
