@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Orion Wellness</title>
-    {% load static %}
     {% include "bootstrap.html" %}
+    {% load static %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script src="{% static 'common.js' %}"></script>
@@ -51,7 +51,10 @@
         .ct-labels span {
             color: whitesmoke;
         }
-
+ @media (min-width: 768px){
+            .jumbotron {
+    min-width: 400px;
+  }
     </style>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -66,9 +69,9 @@
     {% if user.is_authenticated %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-md-2">
             </div>
-            <div class="col-sm-8">
+            <div class="col-md-8">
                 <div style="margin-top: 8px; padding-bottom: 1%; padding-top: 0%; font-family: 'Pacifico', cursive;">
                     <span>
                         <h1 style="text-align: center; color: white;">Welcome to Orion Wellness {{user.get_full_name }}
@@ -76,14 +79,14 @@
                     </span>
                 </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-md-2">
             </div>
         </div>
     </div>
     {% endif %}
     <br />
         <div class="row" style="margin-top: 10px;">
-            <div class="col-sm-4">
+            <div class="col-md-4">
                 <div class="jumbotron bg-dark" style="z-index: -1; margin-left: 150px; border-style: solid; text-align: center; border-width: 0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.98;">
                     <h1 style="color: whitesmoke; font-family: 'Fredoka One', cursive;">Exercise</h1>
                     {% if work_count != 0 %}
@@ -127,9 +130,9 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-md-4">
             </div>
-            <div class="col-sm-4">
+            <div class="col-md-4">
                 <div class="jumbotron bg-dark"
                     style=" margin-right: 150px; text-align: center; border-style: solid; border-width: 0px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); opacity: 0.98;">
                     <h1 style="text-align: center; color: whitesmoke; font-family: 'Fredoka One', cursive;">Nutrition</h1>

@@ -10,14 +10,16 @@
            background-attachment: scroll;
            background-position: center bottom 0px;
         }
-     </style
+
+     </style>
     </head>
 <div class="container">
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-md-2">
         </div>
-        <div class="col-sm-8" style="padding-right: 150px;">
-            <div class = "jumbotron bg-dark" style="margin-top: 175px; margin-left: 50px; padding-top: 40px; padding-bottom: 30px; opacity: 0.96;">
+        <div class="col-md-8" style="padding-right: autopx;">
+            <div class = "jumbotron bg-dark" style="align-self: center; margin-top: 225px; margin-left: auto; padding-top: 40px; padding-bottom: 30px; opacity: 0.96;">
+                <div class="container">
                 <h1 style="color: whitesmoke;">Login</h1>
                 <form action="/login/" method="POST">{% csrf_token %}
                     <table style="color: whitesmoke;">
@@ -37,8 +39,9 @@
                     </table>
                 </form>
             </div>
-            <div class="col-sm-2">
+            <div class="col-md-2">
             </div>
+        </div>
         </div>
     </div>
 </div>
